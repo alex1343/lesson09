@@ -1,0 +1,26 @@
+---
+# tasks file for buildServer
+- name: installing repo for Java 8 in Ubuntu
+  apt_repository: repo='ppa:webupd8team/java'
+
+
+- name: install soft
+  apt: name={{ item }} state=installed
+  with_items:
+    - maven
+    - oracle-java8-installer
+
+
+- name: build war
+  shell: "{{ item }}"
+  with_items: 
+     - export JAVA_HOME=/usr/lib/jvm/java-8-oracle/
+     - mkdir /home/ubuntu/lesson09/
+  #   - cd /home/ubuntu/lesson09/
+     - git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello.git /home/ubuntu/lesson09/boxfuse
+
+- name: mvn package
+  command: mvn package
+  args:
+     chdir: /home/ubuntu/lesson09/boxfuse
+

@@ -1,0 +1,17 @@
+---
+# tasks file for prodServer
+
+- name: installing repo for Java 8 in Ubuntu
+  apt_repository: repo='ppa:webupd8team/java'
+
+- name: install soft
+  apt: name={{ item }} state=installed
+  with_items:
+    - tomcat8
+    - oracle-java8-installer
+
+- name: copy war from buildServer
+  shell: scp "ubuntu@172.31.30.87:/{{ src_folder }}/target/$ProjectFile" "{{ dest_folder }}/"
+  #shell: scp ubuntu@172.31.30.87:/home/ubuntu/lesson09/boxfuse/target/hello-1.0.war  /var/lib/tomcat8/webapps/
+  notify:
+    - restart tomcat8

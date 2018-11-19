@@ -1,0 +1,5 @@
+---
+# defaults file for prodServer
+src_folder: /home/ubuntu/lesson09/boxfuse/
+dest_folder: /var/lib/tomcat8/webapps/
+ProjectFile: "hello-1.0.war"

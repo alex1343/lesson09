@@ -1,0 +1,13 @@
+---
+# - name: deploy build role
+ #  hosts: build
+  # become: yes
+  # roles:
+  #  - buildServer
+
+
+ - name: deploy prod server
+   hosts: prod
+   become: yes
+   roles:
+    - prodServer
